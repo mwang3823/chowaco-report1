@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chowaco One</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <div class="bg-grid"></div>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="bg-ring"></div>
+  <div class="bg-ring r2"></div>
+</div>
+
+<main id="deck"></main>
+
+<div class="prog" aria-hidden="true"><i></i></div>
+<nav class="dots" id="dots" aria-label="Danh sách cảnh"></nav>
+<div class="hud">
+  <span class="hud-name" id="hudName"></span>
+  <span class="hud-count" id="hudCount"></span>
+  <button id="btnPrev" title="Lùi (←)" aria-label="Lùi"></button>
+  <button id="btnNext" title="Tiếp (→)" aria-label="Tiếp"></button>
+  <button id="btnNotes" title="Ghi chú thuyết trình (N)" aria-label="Ghi chú"></button>
+  <button id="btnFull" title="Toàn màn hình (F)" aria-label="Toàn màn hình"></button>
+</div>
+<aside class="notes" id="notes" hidden></aside>
+
+<div class="demo-layer" id="demoLayer" hidden>
+  <button class="demo-close" id="demoClose" aria-label="Đóng demo"></button>
+  <div class="demo-slot" id="demoSlot"></div>
+  <p class="demo-hint">Demo trực tiếp · thao tác bằng chuột · <kbd>Esc</kbd> để quay lại bài trình bày</p>
+</div>
+
+<script src="assets/icons.js"></script>
+<script src="assets/notes.js"></script>
+<script src="scenes.js"></script>
+<script src="deck.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>
