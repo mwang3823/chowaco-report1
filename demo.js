@@ -265,7 +265,7 @@
       ${tcard('Hóa đơn 0-4m³', `Năm ${Y}`, colChart(KYS, [{ name: '0m³', color: '#2E8B57', data: H0 }, { name: '1-4m³', color: '#F39200', data: H14 }], { cat: 'Kỳ ', fmt: f }), tbl(['Kỳ', '0m³', '1-4m³', 'Tổng'], H0.slice(0, KY).map((v, i) => [`Kỳ ${i + 1}`, nf(v), nf(H14[i]), nf(v + H14[i])]), ['TC', nf(t0), nf(t14), nf(t0 + t14)]))}`;
   };
 
-  const tabApp = () => { const t = sum(APP.map((r) => r[1])), p = (t / KH) * 100; return `<div class="sw"><div class="sw-h"><i>${ic('smartphone')}</i><div><small>Khách hàng đã tải app Sawaco</small><b>${nf(t)}</b></div></div>
+  const tabApp = () => { const t = sum(APP.map((r) => r[1])), p = (t / KH) * 100; return `<div class="sw"><div class="sw-h"><i>${ic('smartphone')}</i><div><small>Khách hàng đã tải app Chowaco</small><b>${nf(t)}</b></div></div>
       <div class="sw-r"><span>Tỷ lệ tải app</span><b>${pc(p)}</b></div><div class="pb"><i style="--w:${p}%;background:#80FFDB"></i></div>
       <div class="sw-s"><div><small>Tổng khách hàng</small><b>${nf(KH)}</b></div><div><small>Chưa tải app</small><b>${nf(KH - t)}</b></div></div></div>${wardDonut('Phân bổ theo phường', `${nf(t)} khách hàng đã tải app`, APP)}`; };
 
@@ -278,7 +278,7 @@
   };
 
   const TABS = [['Khách hàng', tabKH], ['Sản lượng', tabSL], ['Doanh thu', tabDT], ['Thất thoát nước', tabTT], ['Giá bán bình quân', tabGB], ['Thu hộ tiền nước', tabTH], ['Định danh', tabDD], ['Gắn mới ĐHN', tabGM], ['Dời ĐHN', tabDoi], ['Thay ĐHN', tabThay],
-    ['Hồ sơ DVKH', () => hoSo('dv', '#AC943A', 'DVKH')], ['Hồ sơ KTKS', () => hoSo('kt', '#5AA0FE', 'KTKS')], ['Hóa đơn', tabHD], ['KH đã tải app Sawaco', tabApp], ['QL Tài sản', tabTS]];
+    ['Hồ sơ DVKH', () => hoSo('dv', '#AC943A', 'DVKH')], ['Hồ sơ KTKS', () => hoSo('kt', '#5AA0FE', 'KTKS')], ['Hóa đơn', tabHD], ['KH đã tải app Chowaco', tabApp], ['QL Tài sản', tabTS]];
 
   /* ---------- main screen ---------- */
   const MODES = [
@@ -310,7 +310,7 @@
     ['Hồ sơ DVKH', nf(hsTotal('dv')), 'Số lượng hồ sơ DVKH', '#AC943A', 'file-text', 10],
     ['Hồ sơ KTKS', nf(hsTotal('kt')), 'Số lượng hồ sơ KTKS', '#5AA0FE', 'file-text', 11],
     ['Hóa đơn', '', `<span class="hd">0m³<b>${nf(H0[KY - 1])}</b></span><span class="hd">1→4m³<b>${nf(H14[KY - 1])}</b></span>`, '#2E8B57', 'file-text', 12],
-    ['KH tải app Sawaco', tot(APP), `Tổng KH: ${nf(KH)}`, '#006978', 'users', 13],
+    ['KH tải app Chowaco', tot(APP), `Tổng KH: ${nf(KH)}`, '#006978', 'users', 13],
     ['Hoàn công sửa bể', nf(sum(BE26)), `Tổng báo bể: ${nf(sum(BE26) + 86)}`, '#8B4513', 'refresh-cw']];
 
   const sb = `<div class="sb" style="color:#fff"><span>9:41</span><i>${ic('bar-chart-2')}${ic('zap')}</i></div>`;
