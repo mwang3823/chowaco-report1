@@ -1,0 +1,144 @@
+/* ================= palette: vivid content ================= */
+
+:root {
+  --line: rgba(90, 180, 255, .45);
+  --glass: linear-gradient(160deg, rgba(20, 70, 160, .74), rgba(6, 24, 66, .88));
+  --ease: cubic-bezier(.16, 1, .3, 1);
+}
+
+.lead { color: #e4eefc; }
+.dsc { color: #d3e3f8; }
+.kicker { background: rgba(14, 60, 140, .6); color: #d6eeff; }
+
+.glass {
+  background:
+    radial-gradient(380px circle at var(--mx, 50%) var(--my, -60%), rgba(130, 210, 255, .14), transparent 62%),
+    var(--glass);
+  box-shadow: 0 22px 50px -22px rgba(0, 0, 0, .9), 0 0 30px rgba(0, 120, 255, .16), inset 0 1px 0 rgba(160, 220, 255, .14);
+  transition: border-color .4s;
+}
+.glass:hover { border-color: rgba(120, 210, 255, .8); }
+.msg { background: linear-gradient(90deg, rgba(14, 64, 160, .92), rgba(6, 30, 86, .92)); }
+.gisf, .photo { box-shadow: 0 26px 60px -24px rgba(0, 0, 0, .95), 0 0 40px rgba(0, 120, 255, .25); }
+
+/* ================= scene number watermark ================= */
+
+.sc-no {
+  position: absolute;
+  right: 54px;
+  bottom: -40px;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 300px;
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(90, 180, 255, .1);
+  pointer-events: none;
+  animation: scno linear both;
+  animation-timeline: --sc;
+  animation-range: cover 0% cover 100%;
+}
+@keyframes scno { from { translate: 0 120px; } to { translate: 0 -120px; } }
+
+/* ================= scene transitions (scroll-driven) ================= */
+
+.stage { will-change: transform, opacity; backface-visibility: hidden; }
+
+@keyframes stage {
+  entry 0% { opacity: 0; transform: perspective(2000px) translate3d(0, 9%, 0) rotateX(7deg) scale(.95); }
+  entry 30% { opacity: 0; transform: perspective(2000px) translate3d(0, 9%, 0) rotateX(7deg) scale(.95); }
+  entry 100% { opacity: 1; transform: perspective(2000px) translate3d(0, 0, 0) rotateX(0) scale(1); }
+  exit 0% { opacity: 1; transform: perspective(2000px) translate3d(0, 0, 0) rotateX(0) scale(1); }
+  exit 70% { opacity: 0; transform: perspective(2000px) translate3d(0, -5%, 0) rotateX(-4deg) scale(1.04); }
+  exit 100% { opacity: 0; transform: perspective(2000px) translate3d(0, -5%, 0) rotateX(-4deg) scale(1.04); }
+}
+}
+
+.stage::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(80, 200, 255, .8), transparent);
+  box-shadow: 0 0 18px 2px rgba(40, 160, 255, .45);
+  pointer-events: none;
+  animation: sline linear both;
+  animation-timeline: --sc;
+  animation-range: entry 35% entry 100%;
+}
+@keyframes sline { from { top: 100%; opacity: 1; } 80% { opacity: 1; } to { top: 0; opacity: 0; } }
+
+.head {
+  animation: hpar linear both;
+  animation-timeline: --sc;
+  animation-range: contain 0% contain 100%;
+}
+@keyframes hpar { to { translate: 0 -14px; } }
+
+/* ================= element reveals ================= */
+
+[data-a] { animation-timing-function: var(--ease); }
+@keyframes a-up { from { opacity: 0; translate: 0 50px; filter: blur(4px); } }
+@keyframes a-left { from { opacity: 0; translate: -90px 0; filter: blur(4px); } }
+@keyframes a-right { from { opacity: 0; translate: 90px 0; filter: blur(4px); } }
+@keyframes a-zoom { from { opacity: 0; scale: .8; filter: blur(5px); } }
+@keyframes a-fade { from { opacity: 0; } }
+@keyframes a-flip { from { opacity: 0; transform: perspective(900px) translateY(50px) rotateX(-55deg); filter: blur(3px); } to { transform: perspective(900px) rotateX(0); } }
+@keyframes a-spin { from { opacity: 0; rotate: -90deg; scale: .5; filter: blur(4px); } }
+@keyframes a-wipe { from { opacity: 0; clip-path: inset(0 100% 0 0); translate: -24px 0; filter: blur(3px); } to { clip-path: inset(-20% -5% -20% -5%); } }
+@keyframes a-phone { from { opacity: 0; transform: perspective(1400px) translate(90px, 120px) rotateY(-38deg) rotateZ(5deg); filter: blur(4px); } to { transform: perspective(1400px) rotateY(0); } }
+svg [data-a] { filter: none; }
+
+/* split headline words */
+h1.split { animation: none !important; background: none; color: #f1f5fa; clip-path: none; }
+h1.split em { background: none; color: inherit; }
+h1 .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .46em .05em .14em; margin: -.46em -.05em -.14em; }
+h1 .w > span {
+  display: inline-block;
+  animation: a-word var(--ease) both;
+  animation-timeline: --sc;
+  animation-range: entry calc(40% + var(--wi) * 3.5%) entry calc(82% + var(--wi) * 3.5%);
+}
+h1 .w > span.g { background: linear-gradient(90deg, #5fd4ff, #1d8dff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+@keyframes a-word { from { transform: translateY(110%) rotate(5deg); opacity: 0; } }
+.scene.first h1 .w > span { animation-timeline: auto; animation-duration: 1.1s; animation-delay: calc(.25s + var(--wi) * .08s); }
+
+/* parallax media */
+.photo img, .cover-photo img, .closing-bg img {
+  scale: 1.14;
+  animation: kenburns 24s ease-in-out infinite alternate, mpar linear both;
+  animation-timeline: auto, --sc;
+  animation-range: normal, cover 0% cover 100%;
+}
+.photo img { animation-name: none, mpar; }
+@keyframes mpar { from { translate: 0 -6%; } to { translate: 0 6%; } }
+
+/* staggered chips */
+.tags span, .procs span, .t6 > div, .g6 > div, .mech span {
+  animation: chip var(--ease) both;
+  animation-timeline: --sc;
+  animation-range: entry 60% entry 100%;
+}
+@keyframes chip { from { opacity: 0; scale: .85; } }
+
+@supports not (animation-timeline: view()) {
+  .sc-no, .stage::before, .head, h1 .w > span, .photo img, .cover-photo img, .closing-bg img, .tags span, .procs span, .t6 > div, .g6 > div, .mech span { animation: none !important; }
+  .stage { transition: opacity .7s var(--ease), transform .7s var(--ease), filter .7s; filter: blur(4px); transform: scale(.96) translateY(3%); }
+  .scene.active .stage { filter: none; transform: none; }
+  [data-a] { filter: blur(3px); transition: opacity .7s var(--ease), translate .7s var(--ease), scale .7s var(--ease), filter .7s, stroke-dashoffset 1s; }
+  [data-a].on { filter: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  h1 .w > span, .sc-no, .head, .stage::before, .photo img, .cover-photo img, .closing-bg img { animation: none !important; }
+}
+h1 .w > span.g { padding: .4em .03em .12em; margin: -.4em -.03em -.12em; }
+h1 .w { padding-right: .14em; margin-right: -.14em; }
+h1 .w > span.g { padding: .4em .14em .12em .03em; margin: -.4em -.14em -.12em -.03em; }
+.stepchip { font-size: 16.5px; }
+.berg .flag { right: 24px; }
+
+[data-a] { will-change: transform, opacity; }
+.stage::before { animation-range: entry 30% entry 100%; }
