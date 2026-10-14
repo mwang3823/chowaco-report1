@@ -1,0 +1,43 @@
+/* ================= performance overrides ================= */
+
+.scene.far .stage { display: none; }
+.stage, [data-a] { will-change: auto; }
+.scene.active .stage { will-change: transform, opacity; }
+
+.glass { backdrop-filter: none; }
+
+.orb { filter: none; opacity: .55; }
+.o1 { background: radial-gradient(closest-side, rgba(11, 92, 255, .9), rgba(11, 92, 255, .35) 45%, transparent); }
+.o2 { background: radial-gradient(closest-side, rgba(0, 183, 255, .8), rgba(0, 183, 255, .3) 45%, transparent); opacity: .4; }
+.bg-grid { animation: none; }
+
+@keyframes a-up { from { opacity: 0; translate: 0 50px; } }
+@keyframes a-left { from { opacity: 0; translate: -90px 0; } }
+@keyframes a-right { from { opacity: 0; translate: 90px 0; } }
+@keyframes a-zoom { from { opacity: 0; scale: .8; } }
+@keyframes a-flip { from { opacity: 0; transform: perspective(900px) translateY(50px) rotateX(-55deg); } to { transform: perspective(900px) rotateX(0); } }
+@keyframes a-spin { from { opacity: 0; rotate: -90deg; scale: .5; } }
+@keyframes a-wipe { from { opacity: 0; clip-path: inset(0 100% 0 0); translate: -24px 0; } to { clip-path: inset(-20% -5% -20% -5%); } }
+@keyframes a-phone { from { opacity: 0; transform: perspective(1400px) translate(90px, 120px) rotateY(-38deg) rotateZ(5deg); } to { transform: perspective(1400px) rotateY(0); } }
+
+.msg::after {
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, transparent calc(50% - 80px), rgba(120, 210, 255, .22) 50%, transparent calc(50% + 80px));
+  animation-name: sweep2;
+}
+@keyframes sweep2 { from { transform: translateX(-100%); } 60%, to { transform: translateX(100%); } }
+
+.photo .scan {
+  top: 0;
+  height: 100%;
+  background: linear-gradient(180deg, transparent calc(50% - 45px), rgba(80, 200, 255, .22) 50%, transparent calc(50% + 45px));
+  animation-name: scan2;
+}
+@keyframes scan2 { from { transform: translateY(-100%); } to { transform: translateY(100%); } }
+
+.flow { filter: none; stroke-width: 3; }
+
+@supports not (animation-timeline: view()) {
+  .stage, .scene.active .stage, [data-a], [data-a].on { filter: none; }
+}
